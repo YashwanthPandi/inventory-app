@@ -1,1 +1,45 @@
-<p>items works!</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold">Items</h2>
+    <button class="btn btn-success" (click)="openCreateModal()">
+      <i class="bi bi-plus-circle"></i> Add Item
+    </button>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Item Name</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>{{ item.name }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.description }}</td>
+              <td>${{ item.price }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm me-1" (click)="openEditModal(item)">
+                  <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="items.length === 0">
+              <td colspan="5" class="text-center py-3">No items available.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
