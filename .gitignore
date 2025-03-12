@@ -24,6 +24,12 @@ functions/.env
 # Environment configuration (sensitive)
 src/environments/environment.ts
 src/environments/environment.prod.ts
+# Environment files
+src/environments/environment.ts
+src/environments/environment.prod.ts
+.env
+.env.*
+
 
 # Bootstrap CSS build (if custom compiled)
 bootstrap-custom.css
@@ -82,3 +88,5 @@ firebase-hosting-cache/
 # Optional: Package lock (if you prefer not to commit it)
 # package-lock.json
 # yarn.lock
+
+
