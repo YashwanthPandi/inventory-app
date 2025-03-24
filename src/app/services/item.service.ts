@@ -9,17 +9,19 @@ export interface Item {
   category: string;
   description: string;
   price: number;
+  sku: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ItemService {
   private apiUrl = 'https://67e0ae927635238f9aae0ffd.mockapi.io/api/v1/items';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getItems(): Observable<Item[]> {
     return this.http.get<Item[]>(this.apiUrl);
   }
+
 
   addItem(item: Omit<Item, 'id'>): Observable<Item> {
     return this.http.post<Item>(this.apiUrl, item);
