@@ -1,33 +1,35 @@
+// services/item.service.ts
 import { Injectable } from '@angular/core';
-import { Item } from '../models/item.model';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
-@Injectable({
-  providedIn: 'root',
-})
+export interface Item {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+}
+
+@Injectable({ providedIn: 'root' })
 export class ItemService {
-  private collectionName = 'items';
-  private itemsCollection: AngularFirestoreCollection<Item>;
+  private apiUrl = 'https://67e0ae927635238f9aae0ffd.mockapi.io/api/v1/items';
 
-  constructor(private firestore: AngularFirestore) {
-    this.itemsCollection = firestore.collection<Item>(this.collectionName);
+  constructor(private http: HttpClient) {}
+
+  getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.apiUrl);
   }
 
-  // getItems(): Observable<Item[]> {
-  //   return this.itemsCollection.valueChanges({ idField: 'id' });
-  // }
-
-  addItem(item: Item): Promise<void> {
-    const id = this.firestore.createId();
-    return this.itemsCollection.doc(id).set({ ...item, id });
+  addItem(item: Omit<Item, 'id'>): Observable<Item> {
+    return this.http.post<Item>(this.apiUrl, item);
   }
 
-  updateItem(item: Item): Promise<void> {
-    return this.itemsCollection.doc(item.id).update(item);
+  updateItem(item: Item): Observable<Item> {
+    return this.http.put<Item>(`${this.apiUrl}/${item.id}`, item);
   }
 
-  deleteItem(id: string): Promise<void> {
-    return this.itemsCollection.doc(id).delete();
+  deleteItem(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
