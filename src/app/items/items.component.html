@@ -1,23 +1,26 @@
 <div class="container mt-5">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="fw-bold">Items</h2>
-    <button class="btn btn-success" (click)="openCreateModal()">
-      <i class="bi bi-plus-circle"></i> Add Item
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <h2 class="fw-bold mb-0">Items</h2>
+    <button class="btn btn-success d-flex align-items-center gap-2 px-4 py-2 fs-5" (click)="openCreateModal()">
+      <i class="bi bi-plus-circle-fill fs-4"></i>
+      <span>Add Item</span>
     </button>
   </div>
 
+  <!-- Table -->
   <div class="card shadow-sm">
     <div class="card-body p-0">
       <div class="table-responsive">
-        <table class="table table-striped table-hover mb-0">
-          <thead class="table-light">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light text-nowrap">
             <tr>
-              <th>SKU ID</th>
-              <th>Item Name</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Actions</th>
+              <th style="min-width: 100px;">SKU ID</th>
+              <th style="min-width: 150px;">Item Name</th>
+              <th style="min-width: 120px;">Category</th>
+              <th style="min-width: 200px;">Description</th>
+              <th style="min-width: 100px;">Price</th>
+              <th class="text-center" style="min-width: 150px;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -27,17 +30,29 @@
               <td>{{ item.category }}</td>
               <td>{{ item.description }}</td>
               <td>${{ item.price }}</td>
-              <td>
-                <button class="btn btn-primary btn-sm me-1" (click)="openEditModal(item)">
-                  <i class="bi bi-pencil-square"></i> Edit
-                </button>
-                <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">
-                  <i class="bi bi-trash"></i> Delete
-                </button>
+              <td class="text-center">
+                <div class="btn-group" role="group" aria-label="Item Actions">
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-md px-3 py-2"
+                    (click)="openEditModal(item)"
+                    title="Edit"
+                  >
+                    <i class="bi bi-pencil-fill fs-5"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-md px-3 py-2"
+                    (click)="deleteItem(item)"
+                    title="Delete"
+                  >
+                    <i class="bi bi-trash-fill fs-5"></i>
+                  </button>
+                </div>
               </td>
             </tr>
             <tr *ngIf="items.length === 0">
-              <td colspan="6" class="text-center py-3">No items available.</td>
+              <td colspan="6" class="text-center py-4 text-muted fs-5">No items available.</td>
             </tr>
           </tbody>
         </table>

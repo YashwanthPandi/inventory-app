@@ -13,12 +13,22 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     CommonModule,
     ItemCreateComponent,
     ItemEditComponent,
+    
   ],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css'
 })
 export class ItemsComponent implements OnInit {
+refreshItems() {
+throw new Error('Method not implemented.');
+}
   items: Item[] = [];
+searchQuery: any;
+sortBy: any;
+paginatedItems: any;
+collectionSize: any;
+page: any;
+pageSize: any;
 
   constructor(
     private modalService: NgbModal,
