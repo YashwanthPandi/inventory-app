@@ -10,11 +10,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
   selector: 'app-items',
   standalone: true,
   imports: [
-    CommonModule,
-    ItemCreateComponent,
-    ItemEditComponent,
-    
-  ],
+    CommonModule
+],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css'
 })
